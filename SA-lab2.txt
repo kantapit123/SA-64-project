@@ -1,0 +1,167 @@
+========== Setup program file ==========
+1.login to youneedawiki with google
+
+2.ทำตามขั้นตอน tutorial
+
+3.install golang [finished] >> $ go version
+
+4.install VScode [finished] >> Show user interface $ code -v
+
+5.install NodeJS v14.x [finished] >> Show by $ node -v
+
+6.register GitHub [already] >> Show user ID
+
+7.install Git [already] >> Show with $ git version
+
+8.create project folder sa-64-example 
+
+9.create backend in sa-64-example
+
+========== BACKEND ==========
+
+10.$ cd backend $ go mod init GitHub.com/kantapit123.sa-64-example
+
+11.install GORM >> $ go get -u GitHub.com/gin-gonic/gin
+		>> $ go get -u gorm.io/gorm
+		>> $ go get -u GORM.io/driver/sqlite
+
+12.$ mkdir entity $ cd entity/
+
+13.create schema User name user.go and edit file like the tutorial
+
+14.create database file name setup.go and edit like the tutorial
+
+15.back to backend and $ mkdir controller $ cd controller
+
+16.create file name user.go to save controller for connect with entity user
+
+17.Create function 'CreateUser' this function like insert on SQL 
+	>> source are in the tutorial
+	// this function will return user that was created back to JSON file 
+	// for UI show the result
+
+18.Create function GetUser 
+	// from the example will used SELECT ... WHERE id = ... for get user data
+	// and selected by primary key that was set by functionalists DB.Raw(...)
+19.Create function ListUsers 
+	// that was list of User by SELECT * the result
+	// list of data in database will pull out correctly when variable is array
+	// to collect the data
+
+20.Create function DeleteUser 
+	// for Delete user by ID from command DELETE ... WHERE ID= ...
+
+21.Create function UpdateUser
+	// for update user by ID from command UPDATE ... WHERE ID= ... 
+	// for ex. used DB.Save() as update in SQL
+22.When all function are CRUD and declare to API path by router in main.go file
+the location file is directory outset (as same as go.mod location)
+
+23.Create file main.go and coding the program for server like the tutorial
+	*** don't forget to edit GitHub.com/[your Github username]/sa-64-ex 
+	to other name that you set in go.mod and user.go (same name) ***
+
+24.download dependency by used command line
+	>> $ go mod tidy
+   And compile program backend by
+	>> $ go build -o main main.go
+25.When the program are compiled correctly then run the main by
+	>> $ ./main
+
+========== FRONTEND ==========
+
+1.Update npm version to current version
+	>> $ npm install -g npm@latest
+
+2.Install yarn 	>> $ npm install --global yarn
+		>> $ yarn --version (version check)
+
+3.Create react project, put the app name is "frontend"
+	>> $ npx create-react-app <<project-name>> --template typescript
+	>> $ cd <<project-name>>
+	>> $ npm start
+
+4.Open browser to test the result -> http://localhost:3000/
+
+5.Install TypeScript (Already) 
+	>> $ yarn add typescript
+
+6.Install Package will be use
+	//Install package for manage Router
+		>> $ npm install --save @types/react-router-dom (Already)
+		>> $ npm install --save react-router-dom (Already)
+	//Install Material-UI (To install and save in your package.json dependencies)
+		//For use component of material ex. button, box, grid etc. (Already)
+			-with npm
+				>> $ npm install @material-ui/core
+			-with yarn
+				>> $ yarn add @material-ui/core
+		//For use icon (Already)
+			-with npm
+				>> $ npm install @material-ui/icons
+			-with yarn
+				>> $ yarn add @material-ui/icons
+		//For use date picker (Already)
+			-with npm
+				>> $ npm i @material-ui/pickers
+			-with yarn
+				>> $ yarn add @material-ui/pickers
+
+			>> $ npm i @date-io/date-fns@1.x date-fns (Already)
+		//For use alert (Already)
+			-with npm
+				>> $ npm install @material-ui/lab
+			-with yarn
+				>> $ yarn add @material-ui/lab
+		//For manages Date&Time (Already)
+			>> $ npm install moment
+
+7.Improved frontend source code for tests the connect with backend for transfer data
+	Website UI (Picture from tutorial):
+		-for first page will show user data from Database(use GET)
+		-second page for insert the User data to database
+		 
+8.The structure of file in directory frontend
+
+	./frontend
+	   /...
+	   /src
+		/...
+		/App.tsx
+	       /models
+			/IUser.ts
+	       /components
+			/Navbar.tsx
+			/Users.tsx
+			/UserCreate.tsx
+
+9.Start with Router by edit file App.tsx in directory name "src" 
+	-(Source code in tutorial)
+
+10.Create directory name "models" in src then create new file name "User.ts"
+	-(Source code in tutorial)
+
+11.Create directory name "components" in src then create new file name 
+	-> "Navbar.tsx"
+	-> "User.tsx"
+	-> "UserCreate.tsx"
+		-(Source code in tutorial)
+
+12.Run command $ npm start at directory frontend for start frontend
+	*** DO NOT FORGET TO RUN BACKEND ***
+
+13.test insert and show the result in web browser > http://localhost:3000
+
+========== How to CORS ========== 
+//Access-Control-Allow-Origin
+//That problem can make you can't insert the data
+
+1.Create function name "CORSMiddleware()" in file main.go at backend folder
+	(Source code in the tutorial)
+
+2.Call the function by add r.Use(CORSMiddleware()) next line to 'r := gin.Default()'**
+
+3.Remove the old main file >> $ rm main
+
+4.Rebuild main >> $ go build -o main main.go and run backend >> $ ./main
+
